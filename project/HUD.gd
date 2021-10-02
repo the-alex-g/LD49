@@ -25,7 +25,7 @@ func _on_MineButton_pressed()->void:
 
 
 func _on_CollecterButton_pressed()->void:
-	emit_signal("build", "collecter")
+	emit_signal("build", "collector")
 
 
 func _on_DrillButton_pressed()->void:

@@ -6,7 +6,7 @@ signal update_display(vapor, ore)
 # enums
 
 # constants
-const COLLECTER := {"vapor":3, "ore":12}
+const COLLECTOR := {"vapor":3, "ore":12}
 const DRILL := {"vapor":5, "ore":10}
 const MINE := {"vapor":10, "ore":20}
 const CONDENSER := {"vapor":5, "ore":25}
@@ -25,6 +25,9 @@ var _first_built := true
 
 # onready variables
 onready var _available_condensers := [$Tail/Condenser, $Tail/Condenser2, $Tail/Condenser3]
+onready var _available_collectors := [$Tail/Collecter, $Tail/Collecter2, $Tail/Collecter3, $Tail/Collecter4, $Tail/Collecter5, $Tail/Collecter6]
+onready var _available_mines := [$Head/Mine, $Head/Mine2, $Head/Mine3]
+onready var _available_drills := [$Head/Drill, $Head/Drill2, $Head/Drill3, $Head/Drill4, $Head/Drill5, $Head/Drill6]
 onready var _explode_timer := $ExplodeTimer
 
 
@@ -74,17 +77,23 @@ func _on_Station_new_material(vapor, ore)->void:
 
 
 func _on_Main_build(station_name:String)->void:
-	if _first_built:
-		_reset_timer()
 	var station_name_capitalized := station_name.to_upper()
 	var station_resources:Dictionary = get(station_name_capitalized)
-	if station_resources["vapor"] <= _vapor and station_resources["ore"] <= _ore:
-		var available_stations:Array = get("_available_"+station_name+"s")
+	var available_stations:Array = get("_available_"+station_name+"s")
+	if station_resources["vapor"] <= _vapor and station_resources["ore"] <= _ore and available_stations.size() > 0:
+		if _first_built:
+			_reset_timer()
+			_first_built = false
+		_vapor -= station_resources["vapor"]
+		_ore -= station_resources["ore"]
 		var station_index := randi()%available_stations.size()
 		var station:Station = available_stations[station_index]
 		station.build()
 		available_stations.remove(station_index)
-		_built_stations.append(station)
+		var station_info := {}
+		station_info["station"] = station
+		station_info["type"] = station_name
+		_built_stations.append(station_info)
 
 
 func _reset_timer()->void:
@@ -94,6 +103,9 @@ func _reset_timer()->void:
 
 func _on_ExplodeTimer_timeout()->void:
 	var doomed_station_index := randi()%_built_stations.size()
-	var doomed_station:Station = _built_stations[doomed_station_index]
+	var doomed_station:Station = _built_stations[doomed_station_index]["station"]
+	var doomed_station_type:String = _built_stations[doomed_station_index]["type"]
+	var available_stations:Array = get("_available_"+doomed_station_type+"s")
+	available_stations.append(doomed_station)
 	doomed_station.destroy()
 	_reset_timer()
