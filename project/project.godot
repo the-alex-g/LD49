@@ -8,16 +8,6 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "Node2D",
-"class": "FileInfo",
-"language": "GDScript",
-"path": "res://FileInfo.gd"
-} ]
-_global_script_class_icons={
-"FileInfo": ""
-}
-
 [application]
 
 config/name="NewProject"
