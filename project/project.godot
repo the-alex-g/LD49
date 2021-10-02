@@ -8,9 +8,19 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "Station",
+"language": "GDScript",
+"path": "res://Station.gd"
+} ]
+_global_script_class_icons={
+"Station": ""
+}
+
 [application]
 
-config/name="NewProject"
+config/name="LD49"
 config/icon="res://icon.png"
 
 [display]

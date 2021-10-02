@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://theme.tres" type="Theme" id=1]
+[ext_resource path="res://HUD.gd" type="Script" id=2]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -54.0
+margin_right = 84.0
+margin_bottom = 54.0
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DrillButton" type="Button" parent="VBoxContainer"]
+margin_right = 84.0
+margin_bottom = 24.0
+text = "Drill"
+
+[node name="CollecterButton" type="Button" parent="VBoxContainer"]
+margin_top = 28.0
+margin_right = 84.0
+margin_bottom = 52.0
+text = "Collecter"
+
+[node name="MineButton" type="Button" parent="VBoxContainer"]
+margin_top = 56.0
+margin_right = 84.0
+margin_bottom = 80.0
+text = "Mine"
+
+[node name="CondenserButton" type="Button" parent="VBoxContainer"]
+margin_top = 84.0
+margin_right = 84.0
+margin_bottom = 108.0
+text = "Condenser"
+
+[connection signal="pressed" from="VBoxContainer/DrillButton" to="." method="_on_DrillButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/CollecterButton" to="." method="_on_CollecterButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/MineButton" to="." method="_on_MineButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/CondenserButton" to="." method="_on_CondenserButton_pressed"]

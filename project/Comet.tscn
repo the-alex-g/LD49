@@ -1,24 +1,154 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Comet.gd" type="Script" id=1]
+[ext_resource path="res://Station.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 150.0
 
 [node name="Comet" type="Node2D"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Tail" type="Area2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Tail"]
 polygon = PoolVector2Array( 3.72714, -153.53, -45.0999, -143.989, -93.3658, -124.907, -120.31, -96.3919, -144.999, -47.4576, -153.418, 1.36954, -144.999, 61.9825, -120.866, 96.2176, -88.3147, 125.963, -44.5387, 148.412, 0.359772, 151.779, -353.721, 89.7888, -758.186, -0.720825, -367.863, -112.444 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Collecter" parent="Tail" instance=ExtResource( 2 )]
+position = Vector2( -250.841, 7.56805 )
+frequency = 5.0
+vapor = true
+
+[node name="Collecter2" parent="Tail" instance=ExtResource( 2 )]
+position = Vector2( -398.318, -53.3636 )
+frequency = 5.0
+vapor = true
+
+[node name="Collecter3" parent="Tail" instance=ExtResource( 2 )]
+position = Vector2( -621.863, -8.70898 )
+frequency = 5.0
+vapor = true
+
+[node name="Collecter4" parent="Tail" instance=ExtResource( 2 )]
+position = Vector2( -403.364, 51.6818 )
+frequency = 5.0
+vapor = true
+
+[node name="Collecter5" parent="Tail" instance=ExtResource( 2 )]
+position = Vector2( -237.387, 90.7501 )
+frequency = 5.0
+vapor = true
+
+[node name="Collecter6" parent="Tail" instance=ExtResource( 2 )]
+position = Vector2( -251.682, -88.2274 )
+frequency = 5.0
+vapor = true
+
+[node name="Condenser" parent="Tail" instance=ExtResource( 2 )]
+position = Vector2( -193.273, 3.36359 )
+frequency = 1.0
+vapor = true
+type = "condenser"
+
+[node name="Condenser2" parent="Tail" instance=ExtResource( 2 )]
+position = Vector2( -329.204, -7.56805 )
+frequency = 1.0
+vapor = true
+type = "condenser"
+
+[node name="Condenser3" parent="Tail" instance=ExtResource( 2 )]
+position = Vector2( -477.523, 2.52267 )
+frequency = 1.0
+vapor = true
+type = "condenser"
 
 [node name="Head" type="Area2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
 shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Drill" parent="Head" instance=ExtResource( 2 )]
+position = Vector2( 29.1591, -31.4319 )
+frequency = 5.0
+ore = true
+
+[node name="Drill2" parent="Head" instance=ExtResource( 2 )]
+position = Vector2( 119.159, 1.56805 )
+frequency = 5.0
+ore = true
+
+[node name="Drill3" parent="Head" instance=ExtResource( 2 )]
+position = Vector2( 35.1591, 110.568 )
+frequency = 5.0
+ore = true
+
+[node name="Drill4" parent="Head" instance=ExtResource( 2 )]
+position = Vector2( 108.159, -54.4319 )
+frequency = 5.0
+ore = true
+
+[node name="Drill5" parent="Head" instance=ExtResource( 2 )]
+position = Vector2( 40.1591, -112.432 )
+frequency = 5.0
+ore = true
+
+[node name="Drill6" parent="Head" instance=ExtResource( 2 )]
+position = Vector2( 74.1591, 39.5681 )
+frequency = 5.0
+ore = true
+
+[node name="Mine" parent="Head" instance=ExtResource( 2 )]
+position = Vector2( -35.2173, -78.0491 )
+frequency = 1.0
+ore = true
+
+[node name="Mine2" parent="Head" instance=ExtResource( 2 )]
+position = Vector2( -91.4038, -35.3473 )
+frequency = 1.0
+ore = true
+
+[node name="Mine3" parent="Head" instance=ExtResource( 2 )]
+position = Vector2( -38.9631, 62.0427 )
+frequency = 1.0
+ore = true
+
+[node name="ExplodeTimer" type="Timer" parent="."]
 
 [connection signal="mouse_entered" from="Tail" to="." method="_on_Tail_mouse_entered"]
 [connection signal="mouse_exited" from="Tail" to="." method="_on_Tail_mouse_exited"]
+[connection signal="new_material" from="Tail/Collecter" to="." method="_on_Station_new_material"]
+[connection signal="new_material" from="Tail/Collecter2" to="." method="_on_Station_new_material"]
+[connection signal="new_material" from="Tail/Collecter3" to="." method="_on_Station_new_material"]
+[connection signal="new_material" from="Tail/Collecter4" to="." method="_on_Station_new_material"]
+[connection signal="new_material" from="Tail/Collecter5" to="." method="_on_Station_new_material"]
+[connection signal="new_material" from="Tail/Collecter6" to="." method="_on_Station_new_material"]
+[connection signal="new_material" from="Tail/Condenser" to="." method="_on_Station_new_material"]
+[connection signal="new_material" from="Tail/Condenser2" to="." method="_on_Station_new_material"]
+[connection signal="new_material" from="Tail/Condenser3" to="." method="_on_Station_new_material"]
 [connection signal="mouse_entered" from="Head" to="." method="_on_Head_mouse_entered"]
 [connection signal="mouse_exited" from="Head" to="." method="_on_Head_mouse_exited"]
+[connection signal="new_material" from="Head/Drill" to="." method="_on_Station_new_material"]
+[connection signal="new_material" from="Head/Drill2" to="." method="_on_Station_new_material"]
+[connection signal="new_material" from="Head/Drill3" to="." method="_on_Station_new_material"]
+[connection signal="new_material" from="Head/Drill4" to="." method="_on_Station_new_material"]
+[connection signal="new_material" from="Head/Drill5" to="." method="_on_Station_new_material"]
+[connection signal="new_material" from="Head/Drill6" to="." method="_on_Station_new_material"]
+[connection signal="new_material" from="Head/Mine" to="." method="_on_Station_new_material"]
+[connection signal="new_material" from="Head/Mine2" to="." method="_on_Station_new_material"]
+[connection signal="new_material" from="Head/Mine3" to="." method="_on_Station_new_material"]
+[connection signal="timeout" from="ExplodeTimer" to="." method="_on_ExplodeTimer_timeout"]
