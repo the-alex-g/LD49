@@ -22,6 +22,14 @@ field_name = "Science"
 position = Vector2( 437, 345 )
 field_name = "Power"
 
+[connection signal="maxed" from="." to="Mining" method="_on_Main_maxed"]
+[connection signal="maxed" from="." to="Housing" method="_on_Main_maxed"]
+[connection signal="maxed" from="." to="Science" method="_on_Main_maxed"]
+[connection signal="maxed" from="." to="Power" method="_on_Main_maxed"]
+[connection signal="update_file" from="." to="Mining" method="_on_Main_update_file"]
+[connection signal="update_file" from="." to="Housing" method="_on_Main_update_file"]
+[connection signal="update_file" from="." to="Science" method="_on_Main_update_file"]
+[connection signal="update_file" from="." to="Power" method="_on_Main_update_file"]
 [connection signal="was_clicked" from="Mining" to="." method="_on_File_clicked"]
 [connection signal="was_clicked" from="Housing" to="." method="_on_File_clicked"]
 [connection signal="was_clicked" from="Science" to="." method="_on_File_clicked"]

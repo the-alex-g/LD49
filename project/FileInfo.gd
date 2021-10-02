@@ -1,4 +1,5 @@
-extends Node
+class_name FileInfo
+extends Node2D
 
 # signals
 
@@ -28,7 +29,6 @@ const POWER_PROGRESSION := [
 # exported variables
 
 # variables
-var _ignore
 
 # onready variables
 
