@@ -13,7 +13,7 @@ signal game_over_win
 
 # variables
 var _ignore
-var _seconds := 30
+var _seconds := 1
 var _minutes := 0
 var _game_is_running := true
 
@@ -61,7 +61,7 @@ func _on_GameTimer_timeout()->void:
 			_seconds = 59
 			_minutes -= 1
 		_update_clock()
-		if _minutes < 0:
+		if _minutes == 0 and _seconds == 0:
 			emit_signal("game_over_lose")
 			_game_is_running = false
 
