@@ -25,48 +25,63 @@ __meta__ = {
 
 [node name="Collecter" parent="Tail" instance=ExtResource( 2 )]
 position = Vector2( -250.841, 7.56805 )
+scale = Vector2( 1, 1 )
 frequency = 5.0
 vapor = true
+type = "collector"
 
 [node name="Collecter2" parent="Tail" instance=ExtResource( 2 )]
 position = Vector2( -398.318, -53.3636 )
+scale = Vector2( 1, 1 )
 frequency = 5.0
 vapor = true
+type = "collector"
 
 [node name="Collecter3" parent="Tail" instance=ExtResource( 2 )]
 position = Vector2( -621.863, -8.70898 )
+scale = Vector2( 1, 1 )
 frequency = 5.0
 vapor = true
+type = "collector"
 
 [node name="Collecter4" parent="Tail" instance=ExtResource( 2 )]
 position = Vector2( -403.364, 51.6818 )
+scale = Vector2( 1, 1 )
 frequency = 5.0
 vapor = true
+type = "collector"
 
 [node name="Collecter5" parent="Tail" instance=ExtResource( 2 )]
 position = Vector2( -237.387, 90.7501 )
+scale = Vector2( 1, 1 )
 frequency = 5.0
 vapor = true
+type = "collector"
 
 [node name="Collecter6" parent="Tail" instance=ExtResource( 2 )]
 position = Vector2( -251.682, -88.2274 )
+scale = Vector2( 1, 1 )
 frequency = 5.0
 vapor = true
+type = "collector"
 
 [node name="Condenser" parent="Tail" instance=ExtResource( 2 )]
 position = Vector2( -193.273, 3.36359 )
+rotation = -0.349066
 frequency = 1.0
 vapor = true
 type = "condenser"
 
 [node name="Condenser2" parent="Tail" instance=ExtResource( 2 )]
 position = Vector2( -329.204, -7.56805 )
+rotation = -0.349066
 frequency = 1.0
 vapor = true
 type = "condenser"
 
 [node name="Condenser3" parent="Tail" instance=ExtResource( 2 )]
 position = Vector2( -477.523, 2.52267 )
+rotation = -0.349066
 frequency = 1.0
 vapor = true
 type = "condenser"
@@ -86,46 +101,55 @@ __meta__ = {
 position = Vector2( 29.1591, -31.4319 )
 frequency = 5.0
 ore = true
+type = "drill"
 
 [node name="Drill2" parent="Head" instance=ExtResource( 2 )]
 position = Vector2( 119.159, 1.56805 )
 frequency = 5.0
 ore = true
+type = "drill"
 
 [node name="Drill3" parent="Head" instance=ExtResource( 2 )]
 position = Vector2( 35.1591, 110.568 )
 frequency = 5.0
 ore = true
+type = "drill"
 
 [node name="Drill4" parent="Head" instance=ExtResource( 2 )]
 position = Vector2( 108.159, -54.4319 )
 frequency = 5.0
 ore = true
+type = "drill"
 
 [node name="Drill5" parent="Head" instance=ExtResource( 2 )]
 position = Vector2( 40.1591, -112.432 )
 frequency = 5.0
 ore = true
+type = "drill"
 
 [node name="Drill6" parent="Head" instance=ExtResource( 2 )]
 position = Vector2( 74.1591, 39.5681 )
 frequency = 5.0
 ore = true
+type = "drill"
 
 [node name="Mine" parent="Head" instance=ExtResource( 2 )]
 position = Vector2( -35.2173, -78.0491 )
 frequency = 1.0
 ore = true
+type = "mine"
 
 [node name="Mine2" parent="Head" instance=ExtResource( 2 )]
 position = Vector2( -91.4038, -35.3473 )
 frequency = 1.0
 ore = true
+type = "mine"
 
 [node name="Mine3" parent="Head" instance=ExtResource( 2 )]
 position = Vector2( -38.9631, 62.0427 )
 frequency = 1.0
 ore = true
+type = "mine"
 
 [node name="ExplodeTimer" type="Timer" parent="."]
 
