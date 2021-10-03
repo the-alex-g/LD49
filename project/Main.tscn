@@ -13,4 +13,6 @@ position = Vector2( 803.904, 271.139 )
 [node name="HUD" parent="." instance=ExtResource( 2 )]
 
 [connection signal="build" from="." to="Comet" method="_on_Main_build"]
+[connection signal="update_display" from="." to="HUD" method="_on_Main_update_display"]
+[connection signal="update_display" from="Comet" to="." method="_on_Comet_update_display"]
 [connection signal="build" from="HUD" to="." method="_on_HUD_build"]

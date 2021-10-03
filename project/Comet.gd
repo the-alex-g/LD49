@@ -42,13 +42,11 @@ func _process(_delta:float)->void:
 func increment_vapor()->void:
 	_vapor += 1
 	emit_signal("update_display", _vapor, _ore)
-	print(_vapor)
 
 
 func increment_ore()->void:
 	_ore += 1
 	emit_signal("update_display", _vapor, _ore)
-	print(_ore)
 
 
 func _on_Tail_mouse_entered()->void:
@@ -86,6 +84,7 @@ func _on_Main_build(station_name:String)->void:
 			_first_built = false
 		_vapor -= station_resources["vapor"]
 		_ore -= station_resources["ore"]
+		emit_signal("update_display", _vapor, _ore)
 		var station_index := randi()%available_stations.size()
 		var station:Station = available_stations[station_index]
 		station.build()

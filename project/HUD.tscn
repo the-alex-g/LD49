@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://theme.tres" type="Theme" id=1]
 [ext_resource path="res://HUD.gd" type="Script" id=2]
+[ext_resource path="res://Art/Bar.png" type="Texture" id=3]
+[ext_resource path="res://LargeFont.tres" type="DynamicFont" id=4]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 2 )
@@ -40,7 +42,60 @@ margin_right = 84.0
 margin_bottom = 108.0
 text = "Condenser"
 
+[node name="GameTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -240.0
+margin_right = 240.0
+margin_bottom = 60.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TimerLabel" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -40.0
+margin_top = -5.0
+margin_right = 40.0
+margin_bottom = 43.0
+grow_horizontal = 2
+theme = ExtResource( 1 )
+custom_fonts/font = ExtResource( 4 )
+text = "1000"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VaporLabel" type="Label" parent="."]
+margin_left = 335.764
+margin_top = 6.72874
+margin_right = 395.764
+margin_bottom = 49.7287
+custom_fonts/font = ExtResource( 4 )
+text = "100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OreLabel" type="Label" parent="."]
+margin_left = 653.894
+margin_top = 6.09879
+margin_right = 713.894
+margin_bottom = 49.0988
+custom_fonts/font = ExtResource( 4 )
+text = "100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="pressed" from="VBoxContainer/DrillButton" to="." method="_on_DrillButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/CollecterButton" to="." method="_on_CollecterButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/MineButton" to="." method="_on_MineButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/CondenserButton" to="." method="_on_CondenserButton_pressed"]
+[connection signal="timeout" from="GameTimer" to="." method="_on_GameTimer_timeout"]
