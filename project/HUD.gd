@@ -3,7 +3,7 @@ extends CanvasLayer
 # signals
 signal build(station_name)
 signal game_over_lose
-signal game_over_win
+signal build_grav_field
 
 # enums
 
@@ -13,14 +13,16 @@ signal game_over_win
 
 # variables
 var _ignore
-var _seconds := 1
-var _minutes := 0
+var _seconds := 0
+var _minutes := 3
 var _game_is_running := true
 
 # onready variables
 onready var _clock := $TimerLabel
 onready var _vapor_label := $VaporLabel
 onready var _ore_label := $OreLabel
+onready var _animation_player := $AnimationPlayer
+onready var _game_over_message := $GameOverInfo/Label
 
 
 func _ready()->void:
@@ -69,3 +71,16 @@ func _on_GameTimer_timeout()->void:
 func _on_Main_update_display(vapor:int, ore:int)->void:
 	_ore_label.text = str(ore)
 	_vapor_label.text = str(vapor)
+
+
+func _on_GravFieldButton_pressed()->void:
+	emit_signal("build_grav_field")
+
+
+func _on_Button_pressed()->void:
+	_ignore = get_tree().change_scene("res://MainMenu.tscn")
+
+
+func _on_Main_game_over(message:String)->void:
+	_animation_player.play("reveal")
+	_game_over_message.text = message

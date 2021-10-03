@@ -1,11 +1,17 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Comet.tscn" type="PackedScene" id=1]
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Main.gd" type="Script" id=3]
+[ext_resource path="res://Art/Background.png" type="Texture" id=4]
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 3 )
+
+[node name="Background" type="Sprite" parent="."]
+scale = Vector2( 32.4688, 18.125 )
+texture = ExtResource( 4 )
+centered = false
 
 [node name="Comet" parent="." instance=ExtResource( 1 )]
 position = Vector2( 803.904, 271.139 )
@@ -13,8 +19,13 @@ position = Vector2( 803.904, 271.139 )
 [node name="HUD" parent="." instance=ExtResource( 2 )]
 
 [connection signal="build" from="." to="Comet" method="_on_Main_build"]
+[connection signal="build_grav_field" from="." to="Comet" method="_on_Main_build_grav_field"]
 [connection signal="explode_stations" from="." to="Comet" method="_on_Main_explode_stations"]
+[connection signal="game_over" from="." to="HUD" method="_on_Main_game_over"]
 [connection signal="update_display" from="." to="HUD" method="_on_Main_update_display"]
+[connection signal="explosions_finished" from="Comet" to="." method="_on_Comet_explosions_finished"]
 [connection signal="update_display" from="Comet" to="." method="_on_Comet_update_display"]
+[connection signal="won" from="Comet" to="." method="_on_Comet_won"]
 [connection signal="build" from="HUD" to="." method="_on_HUD_build"]
+[connection signal="build_grav_field" from="HUD" to="." method="_on_HUD_build_grav_field"]
 [connection signal="game_over_lose" from="HUD" to="." method="_on_HUD_game_over_lose"]

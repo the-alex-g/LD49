@@ -2,6 +2,8 @@ extends Node2D
 
 # signals
 signal update_display(vapor, ore)
+signal won
+signal explosions_finished
 
 # enums
 
@@ -10,6 +12,7 @@ const COLLECTOR := {"vapor":3, "ore":12}
 const DRILL := {"vapor":5, "ore":10}
 const MINE := {"vapor":10, "ore":20}
 const CONDENSER := {"vapor":5, "ore":25}
+const GRAV_FIELD := {"vapor":200, "ore":200}
 const BASE_EXPLODE_TIME := 20
 
 # exported variables
@@ -106,7 +109,9 @@ func _on_ExplodeTimer_timeout()->void:
 
 
 func _on_Main_explode_stations()->void:
-	_ignore = _destroy_station()
+	var station_destroyed = _destroy_station()
+	if station_destroyed == null:
+		emit_signal("explosions_finished")
 	_explode_timer.stop()
 	_is_game_running = false
 
@@ -125,4 +130,12 @@ func _destroy_station()->Station:
 
 func _on_station_exploded()->void:
 	if not _is_game_running:
-		_ignore = _destroy_station()
+		var station_destroyed = _destroy_station()
+		if station_destroyed == null:
+			emit_signal("explosions_finished")
+
+
+func _on_Main_build_grav_field()->void:
+	if _vapor >= GRAV_FIELD["vapor"] and _ore >= GRAV_FIELD["ore"]:
+		emit_signal("won")
+		_explode_timer.stop()

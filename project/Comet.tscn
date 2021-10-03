@@ -1,10 +1,32 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Comet.gd" type="Script" id=1]
 [ext_resource path="res://Station.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Art/TopLayer1.png" type="Texture" id=3]
+[ext_resource path="res://Art/Comet2.png" type="Texture" id=4]
+[ext_resource path="res://Art/Comet1.png" type="Texture" id=5]
+[ext_resource path="res://Art/Comet3.png" type="Texture" id=6]
+[ext_resource path="res://Art/TopLayer2.png" type="Texture" id=7]
+[ext_resource path="res://Art/TopLayer3.png" type="Texture" id=8]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 5 ), ExtResource( 4 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 3.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
 radius = 150.0
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [node name="Comet" type="Node2D"]
 script = ExtResource( 1 )
@@ -12,12 +34,19 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Sprite" type="AnimatedSprite" parent="."]
+position = Vector2( -300, 0 )
+frames = SubResource( 1 )
+frame = 2
+playing = true
+
 [node name="Tail" type="Area2D" parent="."]
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Tail"]
+visible = false
 polygon = PoolVector2Array( 3.72714, -153.53, -45.0999, -143.989, -93.3658, -124.907, -120.31, -96.3919, -144.999, -47.4576, -153.418, 1.36954, -144.999, 61.9825, -120.866, 96.2176, -88.3147, 125.963, -44.5387, 148.412, 0.359772, 151.779, -353.721, 89.7888, -758.186, -0.720825, -367.863, -112.444 )
 __meta__ = {
 "_edit_lock_": true
@@ -92,7 +121,8 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
-shape = SubResource( 1 )
+visible = false
+shape = SubResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -152,6 +182,12 @@ ore = true
 type = "mine"
 
 [node name="ExplodeTimer" type="Timer" parent="."]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -300, 0 )
+frames = SubResource( 3 )
+frame = 1
+playing = true
 
 [connection signal="mouse_entered" from="Tail" to="." method="_on_Tail_mouse_entered"]
 [connection signal="mouse_exited" from="Tail" to="." method="_on_Tail_mouse_exited"]
