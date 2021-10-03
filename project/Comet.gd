@@ -44,13 +44,15 @@ func _process(_delta:float)->void:
 
 
 func increment_vapor()->void:
-	_vapor += 1
-	emit_signal("update_display", _vapor, _ore)
+	if _is_game_running:
+		_vapor += 1
+		emit_signal("update_display", _vapor, _ore)
 
 
 func increment_ore()->void:
-	_ore += 1
-	emit_signal("update_display", _vapor, _ore)
+	if _is_game_running:
+		_ore += 1
+		emit_signal("update_display", _vapor, _ore)
 
 
 func _on_Tail_mouse_entered()->void:
@@ -138,4 +140,5 @@ func _on_station_exploded()->void:
 func _on_Main_build_grav_field()->void:
 	if _vapor >= GRAV_FIELD["vapor"] and _ore >= GRAV_FIELD["ore"]:
 		emit_signal("won")
+		_is_game_running = false
 		_explode_timer.stop()

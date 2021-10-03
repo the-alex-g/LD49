@@ -82,5 +82,6 @@ func _on_Button_pressed()->void:
 
 
 func _on_Main_game_over(message:String)->void:
+	_game_is_running = false
 	_animation_player.play("reveal")
 	_game_over_message.text = message
