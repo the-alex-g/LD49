@@ -3,6 +3,7 @@ extends Node2D
 # signals
 signal build(station_name)
 signal update_display(vapor, ore)
+signal explode_stations
 
 # enums
 
@@ -26,3 +27,7 @@ func _on_HUD_build(station_name:String)->void:
 
 func _on_Comet_update_display(vapor:int, ore:int)->void:
 	emit_signal("update_display", vapor, ore)
+
+
+func _on_HUD_game_over_lose()->void:
+	emit_signal("explode_stations")

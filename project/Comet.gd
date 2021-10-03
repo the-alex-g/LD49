@@ -22,6 +22,7 @@ var _tail_hovered := false
 var _head_hovered := false
 var _built_stations := []
 var _first_built := true
+var _is_game_running := true
 
 # onready variables
 onready var _available_condensers := [$Tail/Condenser, $Tail/Condenser2, $Tail/Condenser3]
@@ -89,10 +90,7 @@ func _on_Main_build(station_name:String)->void:
 		var station:Station = available_stations[station_index]
 		station.build()
 		available_stations.remove(station_index)
-		var station_info := {}
-		station_info["station"] = station
-		station_info["type"] = station_name
-		_built_stations.append(station_info)
+		_built_stations.append(station)
 
 
 func _reset_timer()->void:
@@ -101,10 +99,30 @@ func _reset_timer()->void:
 
 
 func _on_ExplodeTimer_timeout()->void:
-	var doomed_station_index := randi()%_built_stations.size()
-	var doomed_station:Station = _built_stations[doomed_station_index]["station"]
-	var doomed_station_type:String = _built_stations[doomed_station_index]["type"]
+	var doomed_station := _destroy_station()
+	var doomed_station_type:String = doomed_station.type
 	var available_stations:Array = get("_available_"+doomed_station_type+"s")
 	available_stations.append(doomed_station)
-	doomed_station.destroy()
-	_reset_timer()
+
+
+func _on_Main_explode_stations()->void:
+	_ignore = _destroy_station()
+	_explode_timer.stop()
+	_is_game_running = false
+
+
+func _destroy_station()->Station:
+	if _built_stations.size() > 0:
+		var doomed_station_index := randi()%_built_stations.size()
+		var doomed_station:Station = _built_stations[doomed_station_index]
+		_built_stations.remove(doomed_station_index)
+		doomed_station.destroy()
+		_reset_timer()
+		return doomed_station
+	else:
+		return null
+
+
+func _on_station_exploded()->void:
+	if not _is_game_running:
+		_ignore = _destroy_station()

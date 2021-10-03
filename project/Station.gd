@@ -3,6 +3,7 @@ extends Node2D
 
 # signals
 signal new_material(vapor,ore)
+signal station_exploded
 
 # enums
 
@@ -47,3 +48,4 @@ func destroy()->void:
 func _on_Sprite_animation_finished()->void:
 	if _is_exploding:
 		hide()
+		emit_signal("station_exploded")

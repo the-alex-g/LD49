@@ -2,6 +2,8 @@ extends CanvasLayer
 
 # signals
 signal build(station_name)
+signal game_over_lose
+signal game_over_win
 
 # enums
 
@@ -11,8 +13,9 @@ signal build(station_name)
 
 # variables
 var _ignore
-var _seconds := 0
-var _minutes := 6
+var _seconds := 30
+var _minutes := 0
+var _game_is_running := true
 
 # onready variables
 onready var _clock := $TimerLabel
@@ -32,29 +35,35 @@ func _update_clock()->void:
 
 
 func _on_CondenserButton_pressed()->void:
-	emit_signal("build", "condenser")
+	if _game_is_running:
+		emit_signal("build", "condenser")
 
 
 func _on_MineButton_pressed()->void:
-	emit_signal("build", "mine")
+	if _game_is_running:
+		emit_signal("build", "mine")
 
 
 func _on_CollecterButton_pressed()->void:
-	emit_signal("build", "collector")
+	if _game_is_running:
+		emit_signal("build", "collector")
 
 
 func _on_DrillButton_pressed()->void:
-	emit_signal("build", "drill")
+	if _game_is_running:
+		emit_signal("build", "drill")
 
 
 func _on_GameTimer_timeout()->void:
-	_seconds -= 1
-	if _seconds < 0:
-		_seconds = 59
-		_minutes -= 1
-	_update_clock()
-	if _seconds < 0 and _minutes < 0:
-		print("YOU DEAD")
+	if _game_is_running:
+		_seconds -= 1
+		if _seconds < 0:
+			_seconds = 59
+			_minutes -= 1
+		_update_clock()
+		if _minutes < 0:
+			emit_signal("game_over_lose")
+			_game_is_running = false
 
 
 func _on_Main_update_display(vapor:int, ore:int)->void:
